@@ -26,7 +26,7 @@ public class FavoritHelper extends SQLiteOpenHelper{
     //utk buat table
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE FAV_TAB(id integer primary key, judul_cerpen text null, full_text_cerpen text null, image_cerpen text null)";
+        String sql = "CREATE TABLE FAV_TAB(id integer primary key, judul_cerpen text, full_text_cerpen text, image_cerpen text)";
         db.execSQL(sql);
     }
 
@@ -40,9 +40,7 @@ public class FavoritHelper extends SQLiteOpenHelper{
     public Cursor getData(){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor data = db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
-
-        return data;
+        return db.rawQuery("SELECT * FROM "+TABLE_NAME, null);
 
     }
 
@@ -52,11 +50,7 @@ public class FavoritHelper extends SQLiteOpenHelper{
 
         long result = myDB.insert(TABLE_NAME,null,values);
 
-        if (result == -1 ){
-            return false;
-        }else {
-            return true;
-        }
+        return result != -1;
     }
 
     //utk hapus data

@@ -1,15 +1,16 @@
 package com.mulyani.mybooks;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.mulyani.mybooks.Helper.BottomNavigationHelper;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 //menampilkan dasaran
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navigation =  findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        BottomNavigationHelper.disableShiftMode(navigation);
+//        BottomNavigationHelper.disableShiftMode(navigation);
+        navigation.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
         Fragment newFragment;
         newFragment = HomeFragment.newInstance();

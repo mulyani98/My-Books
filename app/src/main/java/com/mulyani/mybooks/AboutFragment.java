@@ -3,7 +3,8 @@ package com.mulyani.mybooks;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import com.mulyani.mybooks.View.Autentikasi.AutentikasiActivity;
  * A simple {@link Fragment} subclass.
  */
 
-//menampilkan fragment about
+// Displaying fragment about
 public class AboutFragment extends Fragment {
 
 
@@ -42,20 +43,12 @@ public class AboutFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         Button tambah = view.findViewById(R.id.btn_tambah);
-        tambah.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), InputCerpenActivity.class));
-            }
-        });
+        tambah.setOnClickListener(v -> startActivity(new Intent(v.getContext(), InputCerpenActivity.class)));
 
         Button signout = view.findViewById(R.id.btn_signout);
-        signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                firebaseAuth.signOut();
-                startActivity(new Intent(getContext(), AutentikasiActivity.class));
-            }
+        signout.setOnClickListener(v -> {
+            firebaseAuth.signOut();
+            startActivity(new Intent(getContext(), AutentikasiActivity.class));
         });
         return view;
     }

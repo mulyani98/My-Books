@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kategori"
+            android:text="@string/category"
             android:textColor="#000"/>
 
         <EditText
@@ -23,112 +23,128 @@
             android:id="@+id/editTextKategori"
             android:lines="1"
             android:inputType="number"
-            android:hint="1 = Horor, 2= Romance"/>
+            android:hint="@string/category_hint"
+            android:autofillHints="Book category" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Judul"
+            android:text="@string/title"
             android:textColor="#000"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextJudul" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tahun Terbit"
-            android:textColor="#000"/>
+            android:id="@+id/editTextJudul"
+            android:autofillHints="Input book title"
+            android:inputType="text" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:id="@+id/editTextTahun" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pengarang"
-            android:textColor="#000"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextPengarang" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Harga"
+            android:text="@string/publish_year"
             android:textColor="#000"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:id="@+id/editTextHarga" />
+            android:id="@+id/editTextTahun"
+            android:autofillHints="publish year" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jumlah Kata"
+            android:text="@string/author"
+            android:textColor="#000"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextPengarang"
+            android:autofillHints="author"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
             android:textColor="#000"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:id="@+id/editTextJumlah" />
+            android:id="@+id/editTextHarga"
+            android:autofillHints="price" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sinopsis"
+            android:text="@string/word_count"
+            android:textColor="#000"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/editTextJumlah"
+            android:autofillHints="word count" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/synopsis"
             android:textColor="#000"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="start|left"
-            android:id="@+id/editTextSinopsis" />
+            android:id="@+id/editTextSinopsis"
+            android:autofillHints="synopsis"
+            android:inputType="text" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full Cerpen"
+            android:text="@string/full_story"
             android:textColor="#000"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:gravity="start|left"
-            android:id="@+id/editTextFullText" />
+            android:id="@+id/editTextFullText"
+            android:autofillHints="full story"
+            android:inputType="text" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="16dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Link Gambar : "
+                android:text="@string/image_link"
                 android:textColor="#000"/>
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTextGambar" />
-            <!--<ImageView
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:id="@+id/ShowImageView"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="..."
-                android:id="@+id/btn_pilih_gambar"/>-->
+                android:id="@+id/editTextGambar"
+                android:autofillHints="image link:"
+                android:inputType="text" />
+
         </LinearLayout>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tambah Cerpen"
+            android:text="@string/add_book"
             android:id="@+id/buttonAdd" />
+
     </LinearLayout>
 </ScrollView>

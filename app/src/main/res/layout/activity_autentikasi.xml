@@ -2,11 +2,11 @@
 <LinearLayout
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mulyani.mybooks.View.Autentikasi.AutentikasiActivity">
+    tools:context="com.mulyani.mybooks.View.Autentikasi.AutentikasiActivity"
+    android:gravity="center">
 
 
     <TextView
@@ -14,54 +14,59 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:text="Sign In"
+        android:text="@string/app_name"
         android:textColor="#000000"
         android:textSize="35sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email:"
-        android:textColor="#7E57C2"
-        android:textSize="30sp" />
-
-    <EditText
-        android:id="@+id/editxt_email"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:textColor="#9575CD" />
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Password:"
-        android:textColor="#7E57C2"
-        android:textSize="30sp" />
+        <EditText
+            android:id="@+id/editxt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textColor="#9575CD"
+            android:hint="@string/email"
+            android:textSize="20sp"
+            android:autofillHints="Email" />
 
-    <EditText
-        android:id="@+id/editxt_pass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:textColor="#9575CD" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="25dp"/>
+
+        <EditText
+            android:id="@+id/editxt_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="#9575CD"
+            android:hint="@string/password"
+            android:textSize="20sp"
+            android:autofillHints="Password" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#9575CD"
-        android:text="Sign In"
+        android:text="@string/sign_in"
         android:textColor="#000"
-        android:textSize="20dp"
-        android:layout_gravity="center"/>
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/txtview_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="Don`t have account? Signup here"
+        android:text="@string/don_t_have_account_signup_here"
         android:textAlignment="center" />
 
 </LinearLayout>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.mulyani.mybooks.DetailActivity"
-    tools:showIn="@layout/activity_detail">
+    tools:showIn="@layout/detail_activity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:id="@+id/full_text_detail" />
+            android:id="@+id/book_contents_text_view" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

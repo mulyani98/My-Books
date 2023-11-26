@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.mulyani.mybooks.View.Admin.InputCerpenActivity;
-import com.mulyani.mybooks.View.Autentikasi.AutentikasiActivity;
+import com.mulyani.mybooks.View.Admin.InputBookActivity;
+import com.mulyani.mybooks.View.Authentication.AuthenticationActivity;
 
 
 /**
@@ -22,33 +22,29 @@ import com.mulyani.mybooks.View.Autentikasi.AutentikasiActivity;
 // Displaying fragment about
 public class AboutFragment extends Fragment {
 
-
     private FirebaseAuth firebaseAuth;
 
     public static AboutFragment newInstance() {
-        AboutFragment fragment = new AboutFragment();
-        return fragment;
+        return new AboutFragment();
     }
     public AboutFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         final View view = inflater.inflate(R.layout.fragment_about, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        Button tambah = view.findViewById(R.id.btn_tambah);
-        tambah.setOnClickListener(v -> startActivity(new Intent(v.getContext(), InputCerpenActivity.class)));
+        Button addButton = view.findViewById(R.id.add_button);
+        addButton.setOnClickListener(v -> startActivity(new Intent(v.getContext(), InputBookActivity.class)));
 
-        Button signout = view.findViewById(R.id.btn_signout);
-        signout.setOnClickListener(v -> {
+        Button signOutButton = view.findViewById(R.id.sign_out_button);
+        signOutButton.setOnClickListener(v -> {
             firebaseAuth.signOut();
-            startActivity(new Intent(getContext(), AutentikasiActivity.class));
+            startActivity(new Intent(getContext(), AuthenticationActivity.class));
         });
         return view;
     }

@@ -1,6 +1,6 @@
 package com.mulyani.mybooks;
 
-import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,42 +12,38 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mulyani.mybooks.Helper.FavoriteHelper;
 
-/* Displays Detail */
-public class DetailActivity extends AppCompatActivity {
+/* displays detailed data from favorites */
+public class DetailFavoriteActivity extends AppCompatActivity {
 
     private ImageView bookImageView;
     String bookTitle, bookContents, bookImage;
     private TextView bookContentsView;
 
-    ContentValues values = new ContentValues();
     FavoriteHelper favoriteHelper;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_activity);
+        setContentView(R.layout.detail_fav_activity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getIntentExtra();
 
         getSupportActionBar().setTitle(bookTitle);
         initView();
 
+        // db helper object creation
         favoriteHelper = new FavoriteHelper(this);
 
         bookContentsView.setText(bookContents);
         Glide.with(this).load(bookImage).into(bookImageView);
 
+        // favorite floating action button
         FloatingActionButton fab = findViewById(R.id.floating_button);
         fab.setOnClickListener(view -> {
 
-            values.put("book_title", bookTitle);
-            values.put("book_contents", bookContents);
-            values.put("book_image", bookImage);
+            favoriteHelper.deleteData(bookTitle);
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-            favoriteHelper.addData(values);
-            finish();
         });
     }
 
@@ -58,7 +54,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        bookContentsView = findViewById(R.id.book_contents_text_view);
-        bookImageView = findViewById(R.id.image_view_book_image);
+        bookContentsView = findViewById(R.id.book_contents_favorite);
+        bookImageView = findViewById(R.id.image_view_detail_image);
     }
 }

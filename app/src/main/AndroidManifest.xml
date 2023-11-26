@@ -9,21 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".View.Admin.InputCerpenActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".View.Admin.InputBookActivity" />
         <activity
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="fullSensor"/>
         <activity
-            android:name=".DetailFavoritActivity"
-            android:label="@string/title_activity_detail_favorit"
+            android:name=".DetailFavoriteActivity"
+            android:label="@string/title_activity_detail_favorite"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SplashActivity"
+            android:screenOrientation="fullSensor"/>
+        <activity android:name=".SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,10 +31,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Autentikasi.AutentikasiActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".View.Autentikasi.RegisterActivity"
-            android:screenOrientation="portrait"></activity>
+        <activity android:name=".View.Authentication.AuthenticationActivity"
+            android:screenOrientation="fullSensor"/>
+        <activity
+            android:name=".View.Authentication.RegistrationActivity"
+            android:screenOrientation="fullSensor" />
     </application>
 
 </manifest>

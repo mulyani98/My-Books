@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="AndroidStudioProjects.My-Books.app" target="17" />
+      <module name="My-Books.app" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

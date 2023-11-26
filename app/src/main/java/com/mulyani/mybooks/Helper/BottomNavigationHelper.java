@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
  * Created by Mulyani on 12/18/17.
  */
 
-//menu di bawah yg 3 home favorit about
+/* BottomNavigationHelper */
 public class BottomNavigationHelper {
     public static void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);

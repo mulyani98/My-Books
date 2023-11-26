@@ -8,14 +8,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,8 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.mulyani.mybooks.Adapter.BukuAdapter;
-import com.mulyani.mybooks.Model.ModelBuku;
+import com.mulyani.mybooks.Adapter.BookAdapter;
+import com.mulyani.mybooks.Model.BookModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,128 +35,108 @@ import ss.com.bannerslider.views.BannerSlider;
  * A simple {@link Fragment} subclass.
  */
 
-//menampilkan fragment home
+/* displays Home Fragments */
 public class HomeFragment extends Fragment {
+    private Spinner spinnerBookType;
+    private ListView listView;
+    private int selectItem;
 
+    List<BookModel> bookModelList;
 
-    private Spinner spKategori;
-    private Button btnCek;
-    private ListView mainListView;
-    private int pilih;
-
-    List<ModelBuku> listBuku;
-
-    private DatabaseReference dbBuku;
+    private DatabaseReference databaseReference;
 
     public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
+        return new HomeFragment();
     }
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_home, container, false);
-
-        //Slider Image
-        BannerSlider bannerSlider = view.findViewById(R.id.banner_slider1);
+        // Slider Image
+        BannerSlider bannerSlider = view.findViewById(R.id.slider_banner);
         List<Banner> banners = new ArrayList<>();
 
-        banners.add(new DrawableBanner(R.drawable.images));
-        banners.add(new DrawableBanner(R.drawable.cinta));
-        banners.add(new DrawableBanner(R.drawable.cintaimage));
+        banners.add(new DrawableBanner(R.drawable.banner_1));
+        banners.add(new DrawableBanner(R.drawable.banner_2));
+        banners.add(new DrawableBanner(R.drawable.banner_3));
+        banners.add(new DrawableBanner(R.drawable.banner_4));
+        banners.add(new DrawableBanner(R.drawable.banner_5));
+        banners.add(new DrawableBanner(R.drawable.banner_6));
+        banners.add(new DrawableBanner(R.drawable.banner_7));
         bannerSlider.setBanners(banners);
 
-        spKategori = view.findViewById(R.id.sp_kategori);
-        btnCek = view.findViewById(R.id.btnCek);
-        mainListView = view.findViewById(R.id.main_list_view);
+        spinnerBookType = view.findViewById(R.id.type_spinner);
+        Button checkButton = view.findViewById(R.id.search_button);
+        listView = view.findViewById(R.id.main_list_view);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.spinner_kategori, android.R.layout.simple_spinner_item);
+                R.array.spinner_book_type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spKategori.setAdapter(adapter);
+        spinnerBookType.setAdapter(adapter);
 
-        listBuku = new ArrayList<>();
-        dbBuku = FirebaseDatabase.getInstance().getReference();
+        bookModelList = new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        checkButton.setOnClickListener(v -> {
+            String bookType = spinnerBookType.getSelectedItem().toString();
 
-
-
-        btnCek.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String kategori = spKategori.getSelectedItem().toString();
-
-                if (kategori.equals("Horror")){
-                   pilih = 1;
-                }else if (kategori.equals("Romance")){
-                    pilih = 2;
-                }
-
-                getDataCerpen(pilih);
-
+            if (bookType.equals("Horror")){
+               selectItem = 1;
+            }else if (bookType.equals("Romance")){
+                selectItem = 2;
             }
+
+            getBookData(selectItem);
         });
 
-        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ModelBuku Book= listBuku.get(position);
-                Intent intent = new Intent(getContext(),  DetailActivity.class);
-                intent.putExtra("judul_cerpen", Book.getJudul_cerpen());
-                intent.putExtra("full_text_cerpen",Book.getFull_text_cerpen());
-                intent.putExtra("image_cerpen", Book.getImage_cerpen());
-                startActivity(intent);
-            }
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
+            BookModel Book= bookModelList.get(position);
+            Intent intent = new Intent(getContext(),  DetailActivity.class);
+            intent.putExtra("book_title", Book.getBookTitle());
+            intent.putExtra("book_contents",Book.getBookContents());
+            intent.putExtra("book_image", Book.getBookImage());
+            startActivity(intent);
         });
+
         return view;
     }
 
-    private void getDataCerpen(final int pilih) {
-        // Menampilkan loading
+    private void getBookData(final int select) {
         final ProgressDialog loading = new ProgressDialog(getContext());
         loading.setTitle("Loading");
-        loading.setMessage("Cek LIst Cerpen");
+        loading.setMessage("Check book");
         loading.setCancelable(false);
-        loading.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        loading.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> dialog.dismiss());
         loading.show();
 
 
-//        dbBuku = FirebaseDatabase.getInstance().getReference();
-        dbBuku.child("DataBuku")
+        databaseReference.child("DataBuku")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        listBuku.clear();           // listBuku -> arraylist
+                        bookModelList.clear();
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            ModelBuku buku = postSnapshot.getValue(ModelBuku.class);
-                            if (buku.getJenis_cerpen() == pilih) {
-                                listBuku.add(buku);
+                            BookModel bookModel = postSnapshot.getValue(BookModel.class);
+                            if (bookModel.getBookType() == select) {
+                                bookModelList.add(bookModel);
                             }
-
                         }
                         loading.hide();
-                        BukuAdapter adapter = new BukuAdapter(getActivity(), listBuku);
-                        mainListView.setAdapter(adapter);
+                        BookAdapter adapter = new BookAdapter(getActivity(), bookModelList);
+                        listView.setAdapter(adapter);
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(getActivity(), "Data Eror", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Data Error", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
 
 }

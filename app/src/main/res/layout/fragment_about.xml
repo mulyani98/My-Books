@@ -45,14 +45,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_book"
-            android:id="@+id/btn_tambah" />
+            android:id="@+id/add_button" />
 
         <Button
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_out"
-            android:id="@+id/btn_signout" />
+            android:id="@+id/sign_out_button" />
 
     </LinearLayout>
 
